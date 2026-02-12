@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['tsx', 'ts'],
-  serverExternalPackages: ['rss-parser'],
+  experimental: {
+    serverComponentsExternalPackages: ['rss-parser'],
+  },
 };
 
 module.exports = nextConfig;
