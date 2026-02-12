@@ -1,0 +1,110 @@
+import { AgentTemplate, AppSettings, NewsCategory, RSSSource } from './types';
+
+export const DEFAULT_AGENT_TEMPLATES: AgentTemplate[] = [
+  {
+    id: 'researcher',
+    name: 'Researcher',
+    description: 'Deep-dives into topics, gathers facts, and produces comprehensive research briefs.',
+    systemPrompt: 'You are a senior technology researcher. Given a topic or set of news articles, produce a thorough research brief covering key facts, stakeholders, timeline, and implications. Cite sources where possible. Output in clean markdown with headers and bullet points.',
+    defaultTools: ['web_search', 'summarize', 'extract_data'],
+    outputFormats: ['markdown', 'bullet_points'],
+    icon: 'Search',
+    color: 'blue',
+  },
+  {
+    id: 'analyst',
+    name: 'Analyst',
+    description: 'Analyzes data and trends to produce structured insights and predictions.',
+    systemPrompt: 'You are a technology analyst. Given data, news, or a topic, produce structured analysis with key takeaways, risk assessment, competitive landscape, and forward-looking predictions. Use bullet points, headers, and tables where appropriate.',
+    defaultTools: ['analyze', 'compare', 'extract_data'],
+    outputFormats: ['markdown', 'json', 'bullet_points'],
+    icon: 'BarChart3',
+    color: 'purple',
+  },
+  {
+    id: 'writer',
+    name: 'Writer',
+    description: 'Produces polished articles, briefings, and documents from research notes.',
+    systemPrompt: 'You are a professional technology writer. Given a topic and research notes, produce a polished article or briefing document suitable for executive readership. Clear, concise, no jargon. Use engaging prose with clear structure.',
+    defaultTools: ['write', 'edit', 'format'],
+    outputFormats: ['markdown', 'plain_text'],
+    icon: 'PenTool',
+    color: 'green',
+  },
+  {
+    id: 'scout',
+    name: 'Scout',
+    description: 'Identifies emerging technologies, startups, and under-the-radar developments.',
+    systemPrompt: 'You are a technology scout. Given a domain or trend, identify emerging technologies, startups, and developments that are not yet mainstream. Provide brief descriptions, relevance assessments, and potential impact ratings. Focus on what\'s new and noteworthy.',
+    defaultTools: ['web_search', 'discover', 'assess'],
+    outputFormats: ['markdown', 'bullet_points'],
+    icon: 'Radar',
+    color: 'cyan',
+  },
+  {
+    id: 'qa',
+    name: 'QA / Fact-Checker',
+    description: 'Verifies claims, checks facts, and flags inaccuracies in content.',
+    systemPrompt: 'You are a fact-checker. Given a piece of content, verify claims against known information. Flag unverifiable claims, correct errors, and provide confidence ratings. Be thorough and cite your reasoning for each verification.',
+    defaultTools: ['verify', 'cross_reference', 'cite'],
+    outputFormats: ['markdown', 'json'],
+    icon: 'ShieldCheck',
+    color: 'amber',
+  },
+  {
+    id: 'monitor',
+    name: 'Monitor',
+    description: 'Tracks ongoing topics and produces status update reports on changes.',
+    systemPrompt: 'You are a monitoring agent. Given a topic, track ongoing developments and produce status updates. Highlight changes since the last update, new developments, and any escalations or risk signals. Be concise and actionable.',
+    defaultTools: ['track', 'compare', 'alert'],
+    outputFormats: ['markdown', 'bullet_points'],
+    icon: 'Activity',
+    color: 'red',
+  },
+];
+
+export const DEFAULT_NEWS_CATEGORIES: NewsCategory[] = [
+  { id: 'ai', name: 'AI & ML', keywords: ['artificial intelligence', 'machine learning', 'LLM', 'GPT', 'deep learning', 'neural network', 'AI'], color: 'purple', isActive: true },
+  { id: 'security', name: 'Cybersecurity', keywords: ['security', 'vulnerability', 'hack', 'breach', 'cyber', 'malware', 'ransomware'], color: 'red', isActive: true },
+  { id: 'startups', name: 'Startups', keywords: ['startup', 'funding', 'series a', 'series b', 'venture capital', 'seed round', 'YC'], color: 'green', isActive: true },
+  { id: 'big-tech', name: 'Big Tech', keywords: ['Google', 'Apple', 'Microsoft', 'Amazon', 'Meta', 'FAANG', 'MAANG'], color: 'blue', isActive: true },
+  { id: 'devtools', name: 'DevTools', keywords: ['developer', 'framework', 'open source', 'SDK', 'API', 'IDE', 'git', 'tooling'], color: 'cyan', isActive: true },
+  { id: 'policy', name: 'Policy', keywords: ['regulation', 'policy', 'government', 'EU', 'FTC', 'antitrust', 'privacy', 'GDPR'], color: 'amber', isActive: true },
+  { id: 'cloud', name: 'Cloud', keywords: ['cloud', 'AWS', 'Azure', 'GCP', 'kubernetes', 'serverless', 'infrastructure'], color: 'sky', isActive: false },
+  { id: 'markets', name: 'Markets', keywords: ['stock', 'IPO', 'market', 'earnings', 'valuation', 'NASDAQ'], color: 'emerald', isActive: false },
+];
+
+export const DEFAULT_RSS_SOURCES: RSSSource[] = [
+  { id: 'openai-blog', name: 'OpenAI Blog', url: 'https://openai.com/blog/rss.xml', categories: ['ai'], isActive: true, lastFetchedAt: null },
+  { id: 'mit-ai', name: 'MIT AI News', url: 'https://news.mit.edu/topic/mitartificial-intelligence2-rss.xml', categories: ['ai'], isActive: true, lastFetchedAt: null },
+  { id: 'techcrunch', name: 'TechCrunch', url: 'https://techcrunch.com/feed/', categories: ['startups', 'big-tech'], isActive: true, lastFetchedAt: null },
+  { id: 'verge', name: 'The Verge', url: 'https://www.theverge.com/rss/index.xml', categories: ['big-tech', 'devtools'], isActive: true, lastFetchedAt: null },
+  { id: 'ars-technica', name: 'Ars Technica', url: 'https://feeds.arstechnica.com/arstechnica/index', categories: ['big-tech', 'security'], isActive: true, lastFetchedAt: null },
+  { id: 'hackernews', name: 'Hacker News', url: 'https://hnrss.org/frontpage', categories: ['devtools', 'startups'], isActive: true, lastFetchedAt: null },
+  { id: 'krebs', name: 'Krebs on Security', url: 'https://krebsonsecurity.com/feed/', categories: ['security'], isActive: true, lastFetchedAt: null },
+  { id: 'schneier', name: 'Schneier on Security', url: 'https://www.schneier.com/feed/', categories: ['security'], isActive: true, lastFetchedAt: null },
+  { id: 'github-blog', name: 'GitHub Blog', url: 'https://github.blog/feed/', categories: ['devtools'], isActive: true, lastFetchedAt: null },
+  { id: 'eff', name: 'EFF Deeplinks', url: 'https://www.eff.org/rss/updates.xml', categories: ['policy'], isActive: true, lastFetchedAt: null },
+  { id: 'huggingface', name: 'Hugging Face Blog', url: 'https://huggingface.co/blog/feed.xml', categories: ['ai'], isActive: true, lastFetchedAt: null },
+  { id: 'anthropic', name: 'Anthropic Blog', url: 'https://www.anthropic.com/feed.xml', categories: ['ai'], isActive: true, lastFetchedAt: null },
+  { id: 'tldr', name: 'TLDR Newsletter', url: 'https://tldr.tech/rss', categories: ['ai', 'devtools', 'startups'], isActive: true, lastFetchedAt: null },
+];
+
+export const DEFAULT_SETTINGS: AppSettings = {
+  openaiApiKey: '',
+  openaiModel: 'gpt-4o',
+  newsCategories: DEFAULT_NEWS_CATEGORIES,
+  rssSources: DEFAULT_RSS_SOURCES,
+  refreshIntervalMinutes: 30,
+  maxNewsItems: 100,
+  notificationPreferences: {
+    taskCompleted: true,
+    newTrendingTopic: false,
+    agentError: true,
+  },
+  export: {
+    notionApiKey: null,
+    notionDatabaseId: null,
+    googleDocsCredentials: null,
+  },
+};
